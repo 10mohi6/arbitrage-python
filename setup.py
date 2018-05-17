@@ -12,7 +12,7 @@ if os.path.exists('README.txt'):
 
 setup(
     name  = 'arbitrage',
-    version = '0.1.3',
+    version = '0.1.4',
     description = 'Get current coin (btc/eth/xrp) ticker from exchanges (bitflyer/btcbox/zaif/bitbank/quoinex)',
     long_description = long_description,
     license = 'MIT',
@@ -20,7 +20,6 @@ setup(
     author_email = '10.mohi.6.y@gmail.com',
     url = 'https://github.com/10mohi6/arbitrage-python',
     keywords = 'arbitrage',
-    # packages = find_packages(),
     py_modules=['arbitrage'],
     install_requires = ['grequests'],
     classifiers = [
