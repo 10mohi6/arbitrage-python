@@ -12,7 +12,7 @@ if os.path.exists('README.txt'):
 
 setup(
     name  = 'arbitrage',
-    version = '0.1.0',
+    version = '0.1.2',
     description = 'Get current coin (btc/eth/xrp) ticker from exchanges (bitflyer/btcbox/zaif/bitbank/quoinex)',
     long_description = long_description,
     license = 'MIT',

@@ -13,13 +13,9 @@ Get current coin (btc/eth/xrp) ticker from exchanges (bitflyer/btcbox/zaif/bitba
 ## Usage
 
 ```python
-#
-# sync
-#
-from arbitrage import Arbitrage
+import arbitrage
 
-arbitrage = Arbitrage()
-ticker = arbitrage.get_ticker()
+ticker = arbitrage.ticker()
 print(ticker)
 # {
 #   "btc": {
@@ -43,10 +39,10 @@ print(ticker)
 # }
 
 
-arbitrage = Arbitrage(timeout = 30, exception_handler = exception_handler)
-
 def exception_handler(request, exception):
 	print('Request failed', exception)
+
+ticker = arbitrage.ticker(timeout=30, exception_handler=exception_handler)
 ```
 
 ## Contributing
