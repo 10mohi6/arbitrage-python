@@ -3,8 +3,7 @@ import grequests
 
 __all__ = ['ticker']
 
-_timeout = 0
-_ticker = {
+TICKER = {
 	'btc' : {
 		'bitflyer' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
 		'btcbox' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
@@ -25,6 +24,9 @@ _ticker = {
 		'diff' : {'ask': '', 'bid': '', 'price': 0}
 	}
 }
+_timeout = 0
+_ticker = TICKER
+
 def _diff(coin, exchanges):
 	global _ticker
 	ask = 10000000
@@ -126,7 +128,8 @@ def _quoinex_ticker(params):
 	return grequests.get(uri, params=None, hooks=hooks, timeout=_timeout)
 
 def ticker(**kwargs):
-	global _timeout, _ticker
+	global _timeout, _ticker, TICKER
+	_ticker = TICKER
 	_timeout = kwargs.get('timeout', 30)
 	_exception_handler = kwargs.get('exception_handler', None)
 	reqs = [
