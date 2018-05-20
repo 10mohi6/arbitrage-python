@@ -18,22 +18,25 @@ import arbitrage
 ticker = arbitrage.ticker()
 print(ticker)
 # {
-#   "btc": {
-#     "bitflyer": {"ask": 923717.0,"bid": 923175.0},
-#     "btcbox": {"ask": 924397.0,"bid": 922298.0},
-#     "zaif": {"ask": 922605.0,"bid": 922445.0},
-#     "bitbank": {"ask": 922904.0,"bid": 922495.0},
-#     "quoinex": {"ask": 921706.83,"bid": 921414.31}
-#   },
-#   "eth": {
-#     "btcbox": {"ask": 78919.0,"bid": 78509.0},
-#     "zaif": {"ask": 78670.0,"bid": 78650.0},
-#     "quoinex": {"ask": 79356.93999,"bid": 78400.01001}
-#   },
-#   "xrp": {
-#     "bitbank": {"ask": 77.219,"bid": 77.171},
-#     "quoinex": {"ask": 76.9898,"bid": 75.881}
-#   }
+# 	'btc': {
+# 		'bitflyer': {'ask': 915466.0, 'bid': 915022.0, 'max': 0, 'min': 0},
+# 		'btcbox': {'ask': 915499.0, 'bid': 913968.0, 'max': 0, 'min': 0},
+# 		'zaif': {'ask': 915450.0, 'bid': 915400.0, 'max': 1, 'min': 0},
+# 		'bitbank': {'ask': 915204.0, 'bid': 915171.0, 'max': 0, 'min': 0},
+# 		'quoinex': {'ask': 914711.0, 'bid': 914358.97, 'max': 0, 'min': 1},
+# 		'diff': {'ask': 'quoinex', 'bid': 'zaif', 'price': 689.0}
+# 	},
+# 	'eth': {
+# 		'btcbox': {'ask': 78362.0, 'bid': 77986.0, 'max': 1, 'min': 0},
+# 		'zaif': {'ask': 77965.0, 'bid': 77820.0, 'max': 0, 'min': 1},
+# 		'quoinex': {'ask': 78290.0, 'bid': 77710.00001, 'max': 0, 'min': 0},
+# 		'diff': {'ask': 'zaif', 'bid': 'btcbox', 'price': 21.0}
+# 	},
+# 	'xrp': {
+# 		'bitbank': {'ask': 75.362, 'bid': 75.351, 'max': 1, 'min': 1},
+# 		'quoinex': {'ask': 75.6704, 'bid': 75.12, 'max': 0, 'min': 0},
+# 		'diff': {'ask': 'bitbank', 'bid': 'bitbank', 'price': -0.01099999999999568}
+# 	}
 # }
 
 

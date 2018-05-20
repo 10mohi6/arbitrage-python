@@ -6,22 +6,39 @@ __all__ = ['ticker']
 _timeout = 0
 _ticker = {
 	'btc' : {
-		'bitflyer' : {'ask': 0, 'bid': 0 },
-		'btcbox' : {'ask': 0, 'bid': 0 },
-		'zaif' : {'ask': 0, 'bid': 0 },
-		'bitbank' : {'ask': 0, 'bid': 0 },
-		'quoinex' : {'ask': 0, 'bid': 0 }
+		'bitflyer' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'btcbox' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'zaif' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'bitbank' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'quoinex' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'diff' : {'ask': '', 'bid': '', 'price': 0}
 	},
 	'eth' : {
-		'btcbox' : {'ask': 0, 'bid': 0 },
-		'zaif' : {'ask': 0, 'bid': 0 },
-		'quoinex' : {'ask': 0, 'bid': 0 }
+		'btcbox' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'zaif' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'quoinex' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'diff' : {'ask': '', 'bid': '', 'price': 0}
 	},
 	'xrp' : {
-		'bitbank' : {'ask': 0, 'bid': 0 },
-		'quoinex' : {'ask': 0, 'bid': 0 }
+		'bitbank' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'quoinex' : {'ask': 0, 'bid': 0, 'max': 0, 'min': 0},
+		'diff' : {'ask': '', 'bid': '', 'price': 0}
 	}
 }
+def _diff(coin, exchanges):
+	global _ticker
+	ask = 10000000
+	bid = 0
+	ask_exc = ''
+	bid_exc = ''
+	for exc in exchanges:
+		if _ticker[coin][exc]['ask'] < ask:
+			ask = _ticker[coin][exc]['ask']
+			ask_exc = exc
+		if _ticker[coin][exc]['bid'] > bid:
+			bid = _ticker[coin][exc]['bid']
+			bid_exc = exc
+	return (bid - ask), ask_exc, bid_exc
 
 def _bitflyer_ticker_hooks(r, *args, **kwargs):
 	global _ticker
@@ -125,4 +142,22 @@ def ticker(**kwargs):
 		_quoinex_ticker({'id': '83'})			
 	]
 	grequests.map(reqs, exception_handler=_exception_handler)
+	price, ask, bid = _diff('btc', ['bitflyer', 'btcbox', 'zaif', 'bitbank', 'quoinex'])
+	_ticker['btc'][ask]['min'] = 1
+	_ticker['btc'][bid]['max'] = 1
+	_ticker['btc']['diff']['ask'] = ask
+	_ticker['btc']['diff']['bid'] = bid
+	_ticker['btc']['diff']['price'] = price
+	price, ask, bid = _diff('eth', ['btcbox', 'zaif', 'quoinex'])
+	_ticker['eth'][ask]['min'] = 1
+	_ticker['eth'][bid]['max'] = 1
+	_ticker['eth']['diff']['ask'] = ask
+	_ticker['eth']['diff']['bid'] = bid
+	_ticker['eth']['diff']['price'] = price
+	price, ask, bid = _diff('xrp', ['bitbank', 'quoinex'])
+	_ticker['xrp'][ask]['min'] = 1
+	_ticker['xrp'][bid]['max'] = 1
+	_ticker['xrp']['diff']['ask'] = ask
+	_ticker['xrp']['diff']['bid'] = bid
+	_ticker['xrp']['diff']['price'] = price
 	return _ticker
